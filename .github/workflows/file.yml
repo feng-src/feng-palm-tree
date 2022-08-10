@@ -1,6 +1,9 @@
+name: aritify
+on: [push]
+
 jobs:
   upload-file:
-    name: save output
+    runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: | 
@@ -10,10 +13,10 @@ jobs:
         with:
           name: output-log-file
           path: output.log
-          
   download-file:
-   steps:
-     - name: download a artifact
-       uses: actions/download-artifact@v3
-       with:
-         name: output-log-file
+    runs-on: ubuntu-latest
+    steps:
+      - name: download a artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: output-log-file
