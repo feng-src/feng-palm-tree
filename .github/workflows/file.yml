@@ -1,0 +1,19 @@
+jobs:
+  upload-file:
+    name: save output
+    steps:
+      - shell: bash
+        run: | 
+          expr 1 + 1 > output.log
+      - name: upload output file to arifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-log-file
+          path: output.log
+          
+  download-file:
+   steps:
+     - name: download a artifact
+       uses: actions/download-artifact@v3
+       with:
+         name: output-log-file
