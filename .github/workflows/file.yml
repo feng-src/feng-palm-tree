@@ -1,0 +1,20 @@
+name: aritify-test
+on: [push]
+jobs:
+  upload-file:
+    runs-on: ubuntu-latest
+    steps:
+      - run: | 
+          expr 1 + 1 > output.log
+      - name: upload output file to arifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-log-file
+          path: output.log
+  download-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download a artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: output-log-file
