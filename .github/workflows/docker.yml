@@ -1,18 +1,22 @@
 name: CI
-on: [push]
+
+on: push
 
 jobs:
-  build:
+  linux:
+    strategy:
+      matrix:
+        container:
+        - 'debian:7'
+        - 'debian:testing'
+        - 'ubuntu:14.04'
+        - 'ubuntu:devel'
+        - 'centos:6'
+        - 'centos:latest'
     runs-on: ubuntu-latest
-    container: 'node:current'
-    
+    container: ${{ matrix.container }}
     steps:
-    - uses: actions/checkout@v1
-    - run: |
-        npm ci
-        npm run build
-        npm test
-  
+      - run: cat /etc/*release
   
   
   
